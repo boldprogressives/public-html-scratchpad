@@ -10,8 +10,21 @@
     eventer(messageEvent,function(e) {
       alert(e.data);
     }, false);
+
+   function emit() { 
+     data = {"sel": document.getElementById("sel").value,
+             "col": document.getElementById("col").value};
+     data = JSON.stringify(data);
+     document.getElementById("iframe").contentWindow.postMessage(data, "*");
+   };
   </script>
 
   Iframe starts after this message..
-  <iframe style="height: 100%; width: 100%" src="child.html"></iframe>
+
+  <input id="sel" placeholder="Selector of iframe element to highlight" />
+  <input id="col" placeholder="Color to highlight it with"/>
+  <input type="submit" id="submit" onclick="emit(); return false;" value="Go!" />
+
+  <iframe id="iframe" style="height: 100%; width: 100%" src="child.html"></iframe>
+
 </html>

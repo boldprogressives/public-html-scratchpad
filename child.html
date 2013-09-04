@@ -4,7 +4,21 @@
 Don't click me.
 
 <div id="two">Maybe click me!</div>
+<div id="msg"></div>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script type="text/javascript">
+    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+    // Listen to message from parent window
+    eventer(messageEvent,function(e) {
+      $("div").css("border", "none");
+      data = JSON.parse(e.data);
+      $(data.sel).css("border", "1px dotted " + data.col);
+    }, false);
+  </script>
+
 <script type="text/javascript">
 $("div").on("click", function() {
 console.log("foo");
