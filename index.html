@@ -1,0 +1,17 @@
+<html>
+  <head></head>
+  <body>
+  <script type="text/javascript">
+    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+    var eventer = window[eventMethod];
+    var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+
+    // Listen to message from child window
+    eventer(messageEvent,function(e) {
+      alert(e.data);
+    }, false);
+  </script>
+
+  Iframe starts after this message..
+  <iframe style="height: 100%; width: 100%" src="child.html"></iframe>
+</html>

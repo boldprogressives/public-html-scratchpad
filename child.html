@@ -1,0 +1,21 @@
+<html>
+<body><div id="one">Click me!</div>
+
+Don't click me.
+
+<div id="two">Maybe click me!</div>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+$("div").on("click", function() {
+console.log("foo");
+  if( !window.parent || !window.parent.postMessage ) return true;
+  $("div").css("border", "none");
+var data = JSON.stringify({"id": $(this).attr("id"), "text": $(this).text()});
+  window.parent.postMessage(data, "*");
+  $(this).css("border", "1px dotted red");
+  return true;
+});
+</script>
+</body>
+</html>
+
